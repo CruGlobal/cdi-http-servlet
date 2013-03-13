@@ -1,6 +1,5 @@
 package org.cru.quickstart;
 
-import org.cru.quickstart.webservices.HelloWorld;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -24,11 +23,8 @@ public class HelloTest extends Arquillian {
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
-    @Inject
-    HelloWorld helloWorld;
-
     @Test
     public void simpleTest() {
-        Assert.assertEquals(helloWorld.getStarted(), "Hello World!");
+
     }
 }
