@@ -13,8 +13,8 @@ import java.io.PrintWriter;
 public class InjectionTestServlet extends HttpServlet {
     @Inject
     HttpServletRequest request;
-    @Inject
-    HttpServletResponse response;
+//    @Inject
+//    HttpServletResponse response;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 
@@ -27,8 +27,8 @@ public class InjectionTestServlet extends HttpServlet {
         if (request != null)
             writer.println("<h1>request was injected</h1>");
 
-        if (response != null)
-            writer.println("<h1>response was injected</h1>");
+//        if (response != null)
+//            writer.println("<h1>response was injected</h1>");
 
         writer.println("</body></html>");
 
