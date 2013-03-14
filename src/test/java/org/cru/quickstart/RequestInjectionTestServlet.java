@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/InjectionTest")
-public class InjectionTestServlet extends HttpServlet {
+@WebServlet("/RequestInjectionTest")
+public class RequestInjectionTestServlet extends HttpServlet {
     @Inject
     HttpServletRequest request;
-//    @Inject
-//    HttpServletResponse response;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 
@@ -26,9 +24,6 @@ public class InjectionTestServlet extends HttpServlet {
 
         if (request != null)
             writer.println("<h1>request was injected</h1>");
-
-//        if (response != null)
-//            writer.println("<h1>response was injected</h1>");
 
         writer.println("</body></html>");
 

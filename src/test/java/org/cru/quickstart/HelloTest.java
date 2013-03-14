@@ -21,19 +21,15 @@ import java.net.URL;
 public class HelloTest extends Arquillian {
     @Deployment
     public static WebArchive createTestArchive() {
-        MavenDependencyResolver resolver = DependencyResolvers
-                .use(MavenDependencyResolver.class)
-                .loadMetadataFromPom("pom.xml");
-
-        return ShrinkWrap.create(WebArchive.class)
-                .addClasses(RequestWebListener.class, HttpObjectsProducer.class, InjectionTestServlet.class)
+        return ShrinkWrap.create(WebArchive.class,"cdi-http-servlet.war")
+                .addClasses(RequestWebListener.class, HttpObjectsProducer.class, RequestInjectionTestServlet.class)
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Test
     public void simpleTest() {
         try {
-            URL url = new URL("http://localhost:8080/arquillian-service/InjectionTest");
+            URL url = new URL("http://localhost:8080/cdi-http-servlet/RequestInjectionTest");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setDoOutput(true);
@@ -46,12 +42,11 @@ public class HelloTest extends Arquillian {
 
             String line;
             while ((line = rd.readLine()) != null) {
-                sb.append(line + '\n');
+                sb.append(line);
             }
 
             final String string = sb.toString();
             Assert.assertTrue(string.contains("request"));
-            Assert.assertTrue(string.contains("response"));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
